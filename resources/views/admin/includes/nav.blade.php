@@ -30,8 +30,8 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{route('admin.types.index')}}">Index</a></li>
-              <li><a class="dropdown-item" href="{{route('admin.types.create')}}">Add Project</a></li>
-              {{-- <li><a class="dropdown-item" href="{{route('admin.types.trashed')}}">Bin</a></li> --}}
+              <li><a class="dropdown-item" href="{{route('admin.types.create')}}">Add Type</a></li>
+              <li><a class="dropdown-item" href="{{route('admin.types.trashed')}}">Bin</a></li>
             </ul>
           </li>
         </ul>

@@ -2,12 +2,12 @@
 @section('contents')
 <h1 class="py-3 text-light">Types:</h1>
 
- {{-- @if (session('delete_success'))
-    @php $project = session('delete_success') @endphp
+ @if (session('delete_success'))
+    @php $type = session('delete_success') @endphp
     <div class="alert alert-danger">
-        The project "{{ $project->title }}" has been moved to trash can
+        The type "{{ $type->name }}" has been deleted
         <form
-            action="{{ route("admin.types.restore", ['project' => $project]) }}"
+            action="{{ route("admin.types.restore", ['type' => $type]) }}"
                 method="post"
                 class="d-inline-block"
             >
@@ -18,11 +18,11 @@
 @endif
 
 @if (session('restore_success'))
-    @php $project = session('restore_success') @endphp
+    @php $type = session('restore_success') @endphp
     <div class="alert alert-success">
-        Project "{{ $project->title }}" has been restored
+        Type "{{ $type->name }}" has been restored
     </div>
-@endif  --}}
+@endif 
 
 
 
@@ -31,7 +31,10 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Number of Projects</th>
             <th scope="col">Actions:</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -39,18 +42,19 @@
             <tr>
                 <th scope="row">{{ $type->id }}</th>
                 <td>{{ $type->name }}</td>
+                <td><?php echo count($type->projects)?></td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.types.show', ['type' => $type]) }}">View</a>
+                    <a class="btn btn-primary" href="{{ route('admin.types.show', ['type' => $type]) }}">View all</a>
                 </td>
-                {{-- <td>
+                <td>
                     <a class="btn btn-warning" href="{{ route('admin.types.edit', ['type' => $type]) }}">Edit</a>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="
                     {{$type->id}}">
-                        Trash
+                        Delete
                     </button>
-                </td> --}}
+                </td>
             </tr>
         @endforeach
     </tbody>
@@ -66,7 +70,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         <div class="modal-body">
-          Do you want to move this type to trash?
+          Do you want to delete this type?
         </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -79,7 +83,7 @@
                     >
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger">Trash</button>
+                        <button class="btn btn-danger">Delete</button>
                     </form>
             </div>
         </div>

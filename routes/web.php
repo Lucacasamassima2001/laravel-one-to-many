@@ -25,8 +25,11 @@ Route::middleware(['auth', 'verified'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/projects/trashed', [ProjectController::class, 'trashed'])->name('projects.trashed');
+    Route::get('/types/trashed', [TypeController::class, 'trashed'])->name('types.trashed');
     Route::post('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
+    Route::post('/types/{type}/restore', [TypeController::class, 'restore'])->name('types.restore');
     Route::delete('/projects/{project}/harddelete', [ProjectController::class, 'harddelete'])->name('projects.harddelete');
+    Route::delete('/types/{type}/harddelete', [TypeController::class, 'harddelete'])->name('types.harddelete');
 });
 
 
@@ -53,5 +56,7 @@ Route::middleware('auth')
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';
